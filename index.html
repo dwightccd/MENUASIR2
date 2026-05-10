@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME // Menú</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --accent: #00d4aa;
+    --accent2: #0099ff;
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --text-dimmer: #555;
+    --glow: rgba(0, 212, 170, 0.22);
+    --glow2: rgba(0, 153, 255, 0.18);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(0, 212, 170, 0.06), transparent 28%),
+      radial-gradient(circle at top right, rgba(0, 153, 255, 0.05), transparent 24%),
+      linear-gradient(180deg, #0d0d0d 0%, #0b0b0b 100%);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.015) 0px,
+        rgba(255,255,255,0.015) 1px,
+        transparent 2px,
+        transparent 4px
+      );
+    opacity: 0.14;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, transparent 0%, rgba(0,212,170,0.03) 50%, transparent 100%);
+    animation: sweep 7s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .header,
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .header {
+    width: 100%;
+    max-width: 820px;
+    padding: 28px 24px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 10px rgba(0, 212, 170, 0.15);
+  }
+
+  .header span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dimmer);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 820px;
+    padding: 24px 24px 60px;
+  }
+
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dimmer);
+    margin-bottom: 14px;
+    margin-top: 8px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .module-card {
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--surface) 0%, #121212 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease,
+      box-shadow 0.18s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 112px;
+  }
+
+  .module-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+
+  .module-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,0.03) 45%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.45s ease;
+    pointer-events: none;
+  }
+
+  .module-card:hover {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, var(--surface2) 0%, #171717 100%);
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 170, 0.05),
+      0 0 18px var(--glow),
+      0 0 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .module-card:hover::before {
+    opacity: 1;
+  }
+
+  .module-card:hover::after {
+    transform: translateX(120%);
+  }
+
+  .mod-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    text-shadow: 0 0 8px rgba(0, 212, 170, 0.12);
+  }
+
+  .mod-name {
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .mod-count {
+    font-size: 0.7rem;
+    color: var(--text-dimmer);
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .footer-note {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dimmer);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .status-line {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dimmer);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(0, 212, 170, 0.6);
+    animation: blink 1.6s infinite ease-in-out;
+    flex-shrink: 0;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.92); }
+  }
+
+  @media (max-width: 560px) {
+    .module-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+      font-size: 1.2rem;
+    }
+
+    .header span {
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HOME // Menú</h1>
+  <span>Acceso rápido a los test de las asignaturas =)</span>
+</div>
+
+<div class="container">
+  <p class="section-title">Seleccionar página</p>
+
+  <div class="module-grid" id="moduleGrid"></div>
+
+  <div class="footer-note">Portal principal</div>
+
+  <div class="status-line">
+    <span class="status-dot"></span>
+    <span>Sistema listo · módulos cargados correctamente</span>
+  </div>
+</div>
+
+<script>
+  const SITES = [
+    {
+      code: "IAW2026",
+      name: "Implantación de Aplicaciones Web",
+      url: "https://dwightccd.github.io/IAW2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "SAD2026",
+      name: "Seguridad y Alta Disponibilidad",
+      url: "https://dwightccd.github.io/SAD2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "SRI2026",
+      name: "Servicios de Red e Internet",
+      url: "https://dwightccd.github.io/SRI2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "SRI2026-2",
+      name: "Servicios de Red e Internet",
+      url: "https://dwightccd.github.io/SRI2026-2/",
+      label: "Abrir sitio web"
+    },
+     {
+      code: "ASGBD2026",
+      name: "Administración de Sistemas Gestores de Bases de Datos",
+      url: "https://dwightccd.github.io/ASGBD2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "ASO2026",
+      name: "Administración de Sistemas Operativos",
+      url: "https://dwightccd.github.io/ASO2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "IPE-II2026",
+      name: "Itinerario Personal para la Empleabilidad II",
+      url: "https://dwightccd.github.io/IPE-II2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "SASP2026",
+      name: "Sostenibilidad Aplicada al Sistema Productivo",
+      url: "https://dwightccd.github.io/SASP2026/",
+      label: "Abrir sitio web"
+    },
+    {
+      code: "IPGS2026",
+      name: "Inglés Profesional I (GS)",
+      url: "https://dwightccd.github.io/IPGS2026/",
+      label: "Abrir sitio web"
+    }
+    // Añade aquí más webs en el futuro:
+    // ,
+    // {
+    //   code: "ASO2026",
+    //   name: "Administración de Sistemas Operativos",
+    //   url: "https://dwightccd.github.io/ASO2026/",
+    //   label: "Abrir sitio web"
+    // }
+  ];
+
+  const moduleGrid = document.getElementById("moduleGrid");
+
+  function renderSites() {
+    moduleGrid.innerHTML = "";
+
+    SITES.forEach(site => {
+      const card = document.createElement("a");
+      card.className = "module-card";
+      card.href = site.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+
+      card.innerHTML = `
+        <div class="mod-code">${site.code}</div>
+        <div class="mod-name">${site.name}</div>
+        <div class="mod-count">${site.label}</div>
+      `;
+
+      moduleGrid.appendChild(card);
+    });
+  }
+
+  renderSites();
+</script>
+
+</body>
+</html>
